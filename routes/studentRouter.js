@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const studentModel = require('../model/studentModel')
-const multer = require('multer')
+const multer = require('multer');
+const { get } = require('mongoose');
 
 multer 
 let storage = multer.diskStorage({
@@ -62,11 +63,10 @@ router.post('/update/:id',upload.single('image'), async (req,res)=>{
     await studentModel.findByIdAndUpdate(req.params.id,stu)
     res.redirect('/student')  
   }
-
-  router.get('/delete/:id', async (req,res)=>{
-    await studentModel.findByIdAndDelete(req.params.id)
-    res.redirect('/student')
-  })
+})
+router.get('/delete/:id', async(req, res, next) => {
+  await studentModel.deleteOne({_id: req.params.id});
+  res.redirect('/student');
 })
 
 module.exports = router
