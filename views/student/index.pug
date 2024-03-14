@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  h3
+    a(href='student/create' class='btn btn-primary') Create new
+  h1(class='display-4') Student list
+  table(class='table')
+    thead
+      tr
+        th Fullname
+        th Email
+        th Phone
+        th Address
+        th Image
+        th action
+    tbody
+      if student != ''
+        each item in student
+          tr
+            td= item.fullname
+            td= item.email
+            td= item.phone
+            td= item.address
+            td
+              img(src=`images/${item.image}`, alt="" style="width:100px;height:100px")
+            td 
+              a(href=`/student/update/${item.id}`) Update
+      else
+        tr
+          td(colspan='5') No data
+    

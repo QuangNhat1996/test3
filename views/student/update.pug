@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  div(class='container col-4')
+    div(class='text-center')
+      h1(class='display-4 font-weight-bold') Update List
+    form(action=`/student/update/${students._id}`, method="post", enctype="multipart/form-data")
+      div(class='form-group')
+        label(for="fullname") Full Name
+        input#fullname.form-control.form-control-sm(name="fullname" , value=students.fullname)
+      div(class='form-group')
+        label(for="email") Email
+        input#email.form-control.form-control-sm(name="email", value=students.email)
+      div(class='form-group')
+        label(for="phone") Phone
+        input#phone.form-control.form-control-sm(name="phone", value=students.phone)
+      div(class='form-group')
+        label(for="address") Address
+        input#address.form-control.form-control-sm(name="address", value=students.address)
+      if students.image != ''
+         img(src=`/images/${students.image}`, alt="" style="width:100px;height:100px")
+      div(class='form-group')
+        label(for="image") Image
+        input#image.form-control-file.form-control-sm(name="image", type="file")
+      div(class='form-group')
+        input.btn.btn-primary(type="submit", value="Update")
