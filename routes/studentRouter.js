@@ -62,6 +62,11 @@ router.post('/update/:id',upload.single('image'), async (req,res)=>{
     await studentModel.findByIdAndUpdate(req.params.id,stu)
     res.redirect('/student')  
   }
+
+  router.get('/delete/:id', async (req,res)=>{
+    await studentModel.findByIdAndDelete(req.params.id)
+    res.redirect('/student')
+  })
 })
 
 module.exports = router
